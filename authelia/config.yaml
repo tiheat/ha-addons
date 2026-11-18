@@ -1,0 +1,35 @@
+name: Authelia
+version: "4.39.28"
+slug: authelia
+description: >-
+  Portal de login unico (SSO) com passkey para os servicos publicados pelo
+  Nginx Proxy Manager, via forward auth.
+url: https://github.com/authelia/authelia
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: services
+boot: auto
+
+# /addon_configs/08ac8ee6_authelia no host, montado em /config no container:
+# configuration.yml, users_database.yml, banco SQLite, segredos e o arquivo
+# de notificacoes (codigos de verificacao) ficam todos ali.
+map:
+  - addon_config:rw
+
+# Sem porta publicada: o Authelia so responde na rede interna dos add-ons, em
+# http://08ac8ee6-authelia:9091, e e publicado pelo Nginx Proxy Manager.
+ports:
+  9091/tcp: null
+ports_description:
+  9091/tcp: Portal e endpoint de autorizacao (HTTP)
+
+# Usadas apenas na primeira inicializacao, para gerar configuration.yml e
+# users_database.yml. Depois disso, edite os arquivos em /addon_configs.
+options:
+  domain: ""
+  admin_user: admin
+schema:
+  domain: str
+  admin_user: match(^[a-z0-9._-]+$)

@@ -1,0 +1,65 @@
+# Template copied to /config/configuration.yml on first boot, with
+# __DOMAIN__ replaced by the add-on's `domain` option. Edit the copy in
+# /addon_configs/08ac8ee6_authelia, not this file.
+# Reference: https://www.authelia.com/configuration/prologue/introduction/
+
+theme: auto
+
+server:
+  address: 'tcp://:9091/'
+
+log:
+  level: info
+
+# Passkey (WebAuthn) is the main factor. With user verification (biometrics
+# or PIN), a passkey login counts as two factors on its own.
+webauthn:
+  disable: false
+  enable_passkey_login: true
+  experimental_enable_passkey_uv_two_factors: true
+  display_name: Authelia
+  timeout: 60s
+  selection_criteria:
+    discoverability: required
+    user_verification: required
+
+# Backup second factor, in case no passkey is at hand.
+totp:
+  disable: false
+  issuer: __DOMAIN__
+
+authentication_backend:
+  password_reset:
+    disable: true
+  file:
+    path: /config/users_database.yml
+    watch: true
+
+access_control:
+  default_policy: deny
+  rules:
+    - domain: '*.__DOMAIN__'
+      subject: 'group:admins'
+      policy: two_factor
+
+session:
+  cookies:
+    - domain: __DOMAIN__
+      authelia_url: https://auth.__DOMAIN__
+      inactivity: 12h
+      expiration: 1d
+      remember_me: 1M
+
+regulation:
+  max_retries: 5
+  find_time: 2m
+  ban_time: 10m
+
+storage:
+  local:
+    path: /config/db.sqlite3
+
+# No SMTP: one-time codes (e.g. to register a passkey) are written here.
+notifier:
+  filesystem:
+    filename: /config/notification.txt

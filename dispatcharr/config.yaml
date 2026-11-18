@@ -1,0 +1,32 @@
+name: Dispatcharr
+version: "1.2.1"
+slug: dispatcharr
+description: >-
+  Central de IPTV: importa playlists M3U e guias XMLTV, organiza os canais,
+  casa a programacao por tvg-id e republica tudo como tuner HDHomeRun, M3U,
+  XMLTV ou Xtream Codes — com proxy de stream, failover entre fontes e
+  estatisticas de uso.
+url: https://github.com/Dispatcharr/Dispatcharr
+arch:
+  - amd64
+  - aarch64
+init: false
+
+ports:
+  # Porta publicada no host. Trocando o valor por `null` nada e exposto no
+  # host e o servico so responde na rede interna dos add-ons, em
+  # http://local-dispatcharr:9191 (hostname derivado do slug, com _ virando -).
+  # Atencao: a interface web tambem deixa de abrir pelo navegador — so faca
+  # isso se um proxy reverso na mesma rede publicar o servico. Nesse caso
+  # remova tambem a chave `watchdog` abaixo, que depende da porta publicada.
+  9191/tcp: 9191
+ports_description:
+  9191/tcp: Interface web, HDHomeRun, M3U, XMLTV e Xtream (HTTP)
+
+# Botao "Abrir interface web" na tela do add-on. Depende da porta publicada —
+# remova junto se trocar a porta por `null`.
+webui: http://[HOST]:[PORT:9191]/
+
+# Sonda de saude usada quando o Watchdog esta ligado. Sem esta chave o
+# Watchdog nao tem o que consultar e age apenas pelo estado do container.
+watchdog: tcp://[HOST]:[PORT:9191]

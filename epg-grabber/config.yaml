@@ -1,0 +1,57 @@
+name: EPG Grabber (XMLTV)
+version: "1.9.2"
+slug: epg_grabber
+description: >-
+  Monta um guia XMLTV a partir de uma playlist M3U: descobre qual site de
+  programacao cobre cada canal pelo catalogo do iptv-org, coleta a grade uma
+  vez por dia e publica o guide.xml por HTTP para o Dispatcharr, o Jellyfin ou
+  qualquer cliente que leia XMLTV.
+url: https://github.com/iptv-org/epg
+arch:
+  - amd64
+  - aarch64
+init: false
+
+# Aba "Configuration" do add-on. Muda so precisa de Restart — pm2.config.js le
+# /data/options.json e vira ENV antes de montar os processos. Os defaults
+# abaixo espelham o ENV do Dockerfile, que continua valendo pra quem roda
+# fora do Home Assistant.
+options:
+  playlist_url: "http://local-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id"
+  epg_gen_args: ""
+  cron_schedule: "0 6 * * *"
+  run_at_startup: true
+  days: 3
+  max_connections: 2
+  delay: 500
+  tz: "America/Bahia"
+schema:
+  # Vazio desativa a geracao e usa o channels.xml do disco como esta.
+  playlist_url: "str"
+  # Extras do gerador, ex. "--sites mi.tv" ou "--incluir-ip-nu".
+  epg_gen_args: "str"
+  cron_schedule: "str"
+  run_at_startup: "bool"
+  days: "int(1,14)"
+  max_connections: "int(1,10)"
+  delay: "int(0,10000)"
+  tz: "str"
+
+ports:
+  # Porta publicada no host. Troque o valor por `null` para NAO expor nada no
+  # host: o servico continua acessivel na rede interna dos add-ons, em
+  # http://local-epg-grabber:3000 (o hostname vem do slug, com _ virando -).
+  # Se fizer isso, remova tambem a chave `watchdog` abaixo, que depende da
+  # porta publicada.
+  3000/tcp: 3000
+ports_description:
+  3000/tcp: guide.xml e channels.xml (HTTP)
+
+# Botao "Abrir interface web" na tela do add-on. Aponta para a listagem de
+# public/, de onde se alcanca o guide.xml e o channels.xml. Depende da porta
+# publicada — remova junto se trocar a porta por `null`.
+webui: http://[HOST]:[PORT:3000]/
+
+# Sonda de saude usada quando o Watchdog esta ligado. Sem esta chave o
+# Watchdog nao tem o que consultar e age apenas pelo estado do container.
+watchdog: tcp://[HOST]:[PORT:3000]

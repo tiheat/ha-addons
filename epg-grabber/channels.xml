@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<channels>
+  <channel site="mi.tv" site_id="br#amazon-sat" lang="pt" xmltv_id="AmazonSat.br@SD">Amazon Sat (1080p)</channel>
+  <channel site="mi.tv" site_id="br#bandsports" lang="pt" xmltv_id="BandSports.br@SD">Band Sports (1080p)</channel>
+  <channel site="mi.tv" site_id="br#band-news" lang="pt" xmltv_id="BandNews.br@SD">BandNews (1080p)</channel>
+  <channel site="mi.tv" site_id="br#rede-boas-novas" lang="pt" xmltv_id="BoasNovas.br@SD">Boas Novas (1080p)</channel>
+  <channel site="mi.tv" site_id="br#canal-rural" lang="pt" xmltv_id="CanalRural.br@SD">Canal Rural (1080p)</channel>
+  <channel site="pluto.tv" site_id="6317ba014d4d040007227f72" lang="pt" xmltv_id="JovemPanNews.br@SD">Jovem Pan News (JP News) (1080p) [Not 24/7]</channel>
+  <channel site="mi.tv" site_id="br#loading" lang="pt" xmltv_id="Loading.br@SD">Loading (720p)</channel>
+  <channel site="mi.tv" site_id="br#nickelodeon" lang="pt" xmltv_id="Nickelodeon.br@SD">Nickelodeon (480p)</channel>
+  <channel site="x1co.com.br" site_id="nickonline.br" lang="pt" xmltv_id="NickOnline.br@HD">NickOnline HD (720p)</channel>
+  <channel site="mi.tv" site_id="cl#nuevo-tiempo" lang="es" xmltv_id="NuevoTiempo.br@SD">Nuevo Tiempo (720p) [Not 24/7]</channel>
+  <channel site="mi.tv" site_id="br#rba-tv-hd" lang="pt" xmltv_id="RBATV.br@SD">RBATV (720p)</channel>
+  <channel site="mi.tv" site_id="br#record" lang="pt" xmltv_id="Record.br@SD">Record (576p)</channel>
+  <channel site="mi.tv" site_id="br#record-news" lang="pt" xmltv_id="RecordNews.br@SD">Record News (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#recordtv-belem" lang="pt" xmltv_id="RecordTVBelem.br@SD">Record TV Belem (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#record-tv-goias-hd" lang="pt" xmltv_id="RecordTVGoias.br@SD">Record TV Goias (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#record-tv-itapoan-hd" lang="pt" xmltv_id="RecordTVItapoan.br@SD">Record TV Itapoan (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#record-tv-rio-hd" lang="pt" xmltv_id="RecordTVRio.br@SD">Record TV Rio (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#record-porto-alegre-hd" lang="pt" xmltv_id="RecordRS.br@SD">Record TV RS (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#recordtv-s-o-paulo-hd" lang="pt" xmltv_id="RecordTVSaoPaulo.br@SD">Record TV SP (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#rede-brasil" lang="pt" xmltv_id="RedeBrasil.br@SD">Rede Brasil (1080p)</channel>
+  <channel site="mi.tv" site_id="br#globo-hd" lang="pt" xmltv_id="RedeGlobo.br@SD">Rede Globo (720p)</channel>
+  <channel site="mi.tv" site_id="br#rede-gospel" lang="pt" xmltv_id="RedeGospel.br@SD">Rede Gospel (1080p)</channel>
+  <channel site="mi.tv" site_id="br#meio-norte" lang="pt" xmltv_id="RedeMeioNorte.br@SD">Rede Meio Norte (720p)</channel>
+  <channel site="mi.tv" site_id="br#rede-minas" lang="pt" xmltv_id="RedeMinas.br@SD">Rede Minas (1080p) [Not 24/7]</channel>
+  <channel site="mi.tv" site_id="br#rede-tv" lang="pt" xmltv_id="RedeTV.br@SD">Rede TV! SP (720p) [Not 24/7]</channel>
+  <channel site="mi.tv" site_id="br#rede-vida" lang="pt" xmltv_id="RedeVida.br@SD">Rede Vida (576p)</channel>
+  <channel site="mi.tv" site_id="br#sbt" lang="pt" xmltv_id="SBTNacional.br@SD">SBT Nacional (720p) [Geo-blocked]</channel>
+  <channel site="mi.tv" site_id="br#sesctv" lang="pt" xmltv_id="SESCTV.br@SD">SESC TV (1080p)</channel>
+  <channel site="mi.tv" site_id="br#sic-tv" lang="pt" xmltv_id="SICTV.br@SD">SIC TV (720p)</channel>
+  <channel site="mi.tv" site_id="br#sony" lang="pt" xmltv_id="SonyChannel.br@SD">Sony Channel (720p)</channel>
+  <channel site="mi.tv" site_id="br#terra-viva" lang="pt" xmltv_id="TerraViva.br@SD">Terra Viva (720p)</channel>
+  <channel site="mi.tv" site_id="br#tv-a-critica" lang="pt" xmltv_id="TVACritica.br@SD">TV A Critica</channel>
+  <channel site="mi.tv" site_id="br#tv-aparecida" lang="pt" xmltv_id="TVAparecida.br@SD">TV Aparecida (1080p) [Not 24/7]</channel>
+  <channel site="mi.tv" site_id="br#assembleia-legislativa-ceara-hd" lang="pt" xmltv_id="TVAssembleiaCeara.br@SD">TV Assembléia Ceará (720p)</channel>
+  <channel site="mi.tv" site_id="br#globo-tv-bahia" lang="pt" xmltv_id="TVBahia.br@HD">TV Bahia (1080i)</channel>
+  <channel site="mi.tv" site_id="br#tv-brasil" lang="pt" xmltv_id="TVBrasil.br@SD">TV Brasil (720p)</channel>
+  <channel site="mi.tv" site_id="br#tv-camara" lang="pt" xmltv_id="TVCamara.br@SD">TV Câmara (1080p)</channel>
+  <channel site="mi.tv" site_id="br#canc-o-nova" lang="pt" xmltv_id="TVCancaoNova.br@SD">TV Cancao Nova (720p)</channel>
+  <channel site="mi.tv" site_id="br#tv-cidade-verde-hd" lang="pt" xmltv_id="TVCidadeVerdeCuiaba.br@SD">TV Cidade Verde Cuiaba</channel>
+  <channel site="mi.tv" site_id="br#tv-clube" lang="pt" xmltv_id="TVClube.br@SD">TV Clube (720p)</channel>
+  <channel site="mi.tv" site_id="br#rede-gazeta" lang="pt" xmltv_id="TVGazeta.br@SD">TV Gazeta (720p)</channel>
+  <channel site="mi.tv" site_id="br#globo-sp" lang="pt" xmltv_id="TVGloboSaoPaulo.br@SD">TV Globo Sao Paulo (720p)</channel>
+  <channel site="mi.tv" site_id="br#tv-guara-hd" lang="pt" xmltv_id="TVGuara.br@SD">TV Guará (720p) [Not 24/7]</channel>
+  <channel site="app.tvufop.com.br" site_id="TVUFOP.br@HD" lang="pt" xmltv_id="TVUFOP.br@HD">TV UFOP (1080p)</channel>
+  <channel site="mi.tv" site_id="br#tve-1" lang="pt" xmltv_id="TVERS.br@SD">TVE RS (1080p)</channel>
+  <channel site="mi.tv" site_id="br#tve-bahia" lang="pt" xmltv_id="TVEBahia.br@SD">TVE RS (1080p) [Not 24/7]</channel>
+</channels>

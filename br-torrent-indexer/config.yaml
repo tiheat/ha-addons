@@ -1,0 +1,18 @@
+name: "Torrent Indexer"
+version: "1.0.1"
+slug: "torrent_indexer"
+description: "felipemarinho97/torrent-indexer with bundled Redis"
+url: "https://github.com/felipemarinho97/torrent-indexer"
+arch:
+  - amd64
+  - aarch64
+startup: application
+boot: auto
+ports:
+  7006/tcp: 8080
+ports_description:
+  7006/tcp: "Web UI"
+options:
+  log_level: 0
+schema:
+  log_level: int(0,3)

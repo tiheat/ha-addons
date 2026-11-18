@@ -1,0 +1,28 @@
+# Alternativa para rodar no NAS, em vez do add-on do Home Assistant.
+services:
+  dispatcharr:
+    image: ghcr.io/dispatcharr/dispatcharr:latest
+    container_name: dispatcharr
+    restart: unless-stopped
+    ports:
+      - "9191:9191"
+    volumes:
+      - dispatcharr_data:/data
+    environment:
+      - DISPATCHARR_ENV=aio
+      - REDIS_HOST=localhost
+      - CELERY_BROKER_URL=redis://localhost:6379/0
+      - DISPATCHARR_LOG_LEVEL=info
+      - TZ=America/Bahia
+      # Atras de proxy reverso, informe o IP/CIDR do proxy para que Network
+      # Access, Stats e os limites de taxa vejam o IP real do cliente:
+      #- DISPATCHARR_TRUSTED_PROXIES=192.168.31.0/24
+      # Em maquina apertada (padrao: 4 uWSGI, ate 6 Celery):
+      #- UWSGI_WORKERS=2
+      #- CELERY_MAX_WORKERS=2
+    # Descomente para aceleracao por hardware (Intel/AMD):
+    #devices:
+    #  - /dev/dri:/dev/dri
+
+volumes:
+  dispatcharr_data:

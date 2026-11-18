@@ -7,6 +7,7 @@ Custom Home Assistant add-ons, previously kept as local add-ons in `/addons`.
 | Torrent Indexer (with bundled Redis) | [`br-torrent-indexer`](br-torrent-indexer) | [felipemarinho97/torrent-indexer](https://github.com/felipemarinho97/torrent-indexer) |
 | Dispatcharr | [`dispatcharr`](dispatcharr) | [Dispatcharr/Dispatcharr](https://github.com/Dispatcharr/Dispatcharr) |
 | EPG Grabber (XMLTV) | [`epg-grabber`](epg-grabber) | [iptv-org/epg](https://github.com/iptv-org/epg) |
+| Authelia (SSO com passkey) | [`authelia`](authelia) | [authelia/authelia](https://github.com/authelia/authelia) |
 
 ## Installation
 

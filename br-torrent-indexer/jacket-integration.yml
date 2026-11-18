@@ -6,7 +6,7 @@ language: pt-BR
 type: public
 encoding: UTF-8
 links:
-  - http://app_local_torrent_indexer:7006/
+  - http://app_08ac8ee6_torrent_indexer:7006/
 
 caps:
   categorymappings:

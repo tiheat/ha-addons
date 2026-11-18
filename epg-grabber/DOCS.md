@@ -51,7 +51,7 @@ Com a porta publicada:
 - `http://<host>:3000/channels.xml` — o mapeamento gerado, útil pra conferir
 - `http://<host>:3000/` — listagem do diretório
 
-Na rede interna dos add-ons: `http://local-epg-grabber:3000/…`
+Na rede interna dos add-ons: `http://08ac8ee6-epg-grabber:3000/…`
 
 ## Configuração
 
@@ -63,7 +63,7 @@ montar os processos).
 
 | Opção | Padrão | Para que serve |
 | --- | --- | --- |
-| `playlist_url` | `http://local-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id` | Playlist de origem. Vazio desativa a geração e usa o `channels.xml` do disco |
+| `playlist_url` | `http://08ac8ee6-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id` | Playlist de origem. Vazio desativa a geração e usa o `channels.xml` do disco |
 | `epg_gen_args` | — | Argumentos extras do gerador, ex. `--sites mi.tv` ou `--incluir-ip-nu` |
 | `cron_schedule` | `0 6 * * *` | Quando coletar |
 | `run_at_startup` | `true` | Coletar também ao iniciar |

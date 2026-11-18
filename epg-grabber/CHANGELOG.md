@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.3
+- Installed from the `tiheat/ha-addons` GitHub repository instead of `/addons`:
+  the default `playlist_url` now points to `08ac8ee6-dispatcharr`, the
+  hostname of the Dispatcharr add-on installed from that repository.
+
 ## 1.9.2
 - `playlist_url`, `epg_gen_args`, `cron_schedule`, `run_at_startup`, `days`,
   `max_connections`, `delay` e `tz` viraram opções na aba **Configuration**

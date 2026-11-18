@@ -1,5 +1,5 @@
 name: EPG Grabber (XMLTV)
-version: "1.9.2"
+version: "1.9.3"
 slug: epg_grabber
 description: >-
   Monta um guia XMLTV a partir de uma playlist M3U: descobre qual site de
@@ -17,7 +17,7 @@ init: false
 # abaixo espelham o ENV do Dockerfile, que continua valendo pra quem roda
 # fora do Home Assistant.
 options:
-  playlist_url: "http://local-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id"
+  playlist_url: "http://08ac8ee6-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id"
   epg_gen_args: ""
   cron_schedule: "0 6 * * *"
   run_at_startup: true
@@ -40,7 +40,7 @@ schema:
 ports:
   # Porta publicada no host. Troque o valor por `null` para NAO expor nada no
   # host: o servico continua acessivel na rede interna dos add-ons, em
-  # http://local-epg-grabber:3000 (o hostname vem do slug, com _ virando -).
+  # http://08ac8ee6-epg-grabber:3000 (o hostname vem do slug, com _ virando -).
   # Se fizer isso, remova tambem a chave `watchdog` abaixo, que depende da
   # porta publicada.
   3000/tcp: 3000

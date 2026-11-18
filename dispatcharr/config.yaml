@@ -15,7 +15,7 @@ init: false
 ports:
   # Porta publicada no host. Trocando o valor por `null` nada e exposto no
   # host e o servico so responde na rede interna dos add-ons, em
-  # http://local-dispatcharr:9191 (hostname derivado do slug, com _ virando -).
+  # http://08ac8ee6-dispatcharr:9191 (hostname derivado do slug, com _ virando -).
   # Atencao: a interface web tambem deixa de abrir pelo navegador — so faca
   # isso se um proxy reverso na mesma rede publicar o servico. Nesse caso
   # remova tambem a chave `watchdog` abaixo, que depende da porta publicada.

@@ -14,7 +14,7 @@ Abra a interface em `http://<host>:9191` e crie a conta de administrador. Em
 seguida, em **M3U & EPG Manager**, adicione a playlist e a fonte de EPG.
 
 Se o EPG Grabber deste mesmo repositório estiver instalado, a fonte é
-`http://local-epg-grabber:3000/guide.xml` — os dois add-ons se enxergam pela
+`http://08ac8ee6-epg-grabber:3000/guide.xml` — os dois add-ons se enxergam pela
 rede interna, sem depender de porta publicada.
 
 ## Ligando no Jellyfin
@@ -48,7 +48,7 @@ nos padrões.
 ## Fechar a porta do host
 
 `ports: 9191/tcp: null` tira a porta do host e deixa o serviço só na rede
-interna, em `http://local-dispatcharr:9191`. **Atenção:** isso também tira a
+interna, em `http://08ac8ee6-dispatcharr:9191`. **Atenção:** isso também tira a
 interface web do navegador. Só faz sentido se houver um proxy reverso na mesma
 rede publicando o serviço. Nesse caso remova também as chaves `webui` e
 `watchdog`, que dependem da porta publicada.

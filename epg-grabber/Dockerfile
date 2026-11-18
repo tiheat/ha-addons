@@ -21,7 +21,7 @@ ENV TZ=America/Bahia \
     DAYS=3 \
     MAX_CONNECTIONS=2 \
     DELAY=500 \
-    PLAYLIST_URL="http://local-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id"
+    PLAYLIST_URL="http://08ac8ee6-dispatcharr:9191/output/m3u?tvg_id_source=tvg_id"
 
 # PLAYLIST_URL aponta para o proprio Dispatcharr, na rede interna dos add-ons
 # (hostname derivado do slug dele, com _ virando -): o channels.xml passa a

@@ -4,6 +4,9 @@
 FROM golang:1.24 AS builder
 
 WORKDIR /go/src/app
+# Changes whenever the branch gets a new commit, so Docker does not reuse a
+# cached clone of an older revision on rebuild.
+ADD https://api.github.com/repos/tiheat/torrent-indexer/git/refs/heads/feature/fix-broken-br-indexers /tmp/branch-ref.json
 RUN git clone --depth 1 --branch feature/fix-broken-br-indexers https://github.com/tiheat/torrent-indexer.git .
 
 RUN go get -d -v ./...

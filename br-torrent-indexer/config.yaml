@@ -1,5 +1,5 @@
 name: "Torrent Indexer"
-version: "1.0.1"
+version: "1.0.2"
 slug: "torrent_indexer"
 description: "felipemarinho97/torrent-indexer with bundled Redis"
 url: "https://github.com/felipemarinho97/torrent-indexer"

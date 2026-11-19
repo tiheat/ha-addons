@@ -1,5 +1,5 @@
 name: Authelia
-version: "4.39.28"
+version: "4.39.28-1"
 slug: authelia
 description: >-
   Portal de login unico (SSO) com passkey para os servicos publicados pelo

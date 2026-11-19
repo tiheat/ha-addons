@@ -42,6 +42,11 @@ location = /internal/authelia/authz {
     proxy_set_header X-Forwarded-For $remote_addr;
     proxy_set_header Content-Length "";
     proxy_set_header Connection "";
+    # Nunca repasse credenciais Basic guardadas pelo navegador (ex.: de uma
+    # access list antiga): o Authelia as trata como tentativas de login e
+    # bloqueia o usuario apos algumas falhas.
+    proxy_set_header Authorization "";
+    proxy_set_header Proxy-Authorization "";
 }
 
 auth_request /internal/authelia/authz;
@@ -58,6 +63,17 @@ include /config/nginx/snippets/authelia.conf;
 O upstream fica numa variavel para o nginx resolve-lo em tempo de requisicao:
 se o Authelia estiver parado, so os hosts protegidos falham, e o nginx
 continua subindo.
+
+## Usuario bloqueado
+
+Apos 5 falhas em 2 minutos o usuario fica bloqueado por 10 minutos. Para
+liberar antes:
+
+```bash
+sudo docker exec -e AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE=/config/secrets/storage \
+  app_08ac8ee6_authelia authelia storage bans user revoke <usuario> \
+  --config /config/configuration.yml
+```
 
 ## Usuarios e grupos
 

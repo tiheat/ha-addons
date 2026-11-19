@@ -59,4 +59,9 @@ export AUTHELIA_IDENTITY_VALIDATION_RESET_PASSWORD_JWT_SECRET_FILE="$SECRETS/jwt
 export AUTHELIA_SESSION_SECRET_FILE="$SECRETS/session"
 export AUTHELIA_STORAGE_ENCRYPTION_KEY_FILE="$SECRETS/storage"
 
+# Optional: SMTP notifier password, created by the user (never in the config).
+if [ -s "$SECRETS/smtp_password" ]; then
+  export AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE="$SECRETS/smtp_password"
+fi
+
 exec /app/entrypoint.sh --config "$CONFIG/configuration.yml"

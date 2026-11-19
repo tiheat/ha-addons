@@ -64,6 +64,22 @@ O upstream fica numa variavel para o nginx resolve-lo em tempo de requisicao:
 se o Authelia estiver parado, so os hosts protegidos falham, e o nginx
 continua subindo.
 
+## Notificacoes por e-mail (SMTP)
+
+Grave a senha da caixa em `/addon_configs/08ac8ee6_authelia/secrets/smtp_password`
+(`chmod 600`) e troque o bloco `notifier` de `configuration.yml`:
+
+```yaml
+notifier:
+  smtp:
+    address: submission://smtp.example.com:587
+    username: authelia@example.com
+    sender: Authelia <authelia@example.com>
+```
+
+O add-on exporta `AUTHELIA_NOTIFIER_SMTP_PASSWORD_FILE` quando o arquivo existe;
+reinicie o add-on depois de criar o arquivo.
+
 ## Usuario bloqueado
 
 Apos 5 falhas em 2 minutos o usuario fica bloqueado por 10 minutos. Para

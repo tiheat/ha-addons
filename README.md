@@ -8,6 +8,7 @@ Custom Home Assistant add-ons, previously kept as local add-ons in `/addons`.
 | Dispatcharr | [`dispatcharr`](dispatcharr) | [Dispatcharr/Dispatcharr](https://github.com/Dispatcharr/Dispatcharr) |
 | EPG Grabber (XMLTV) | [`epg-grabber`](epg-grabber) | [iptv-org/epg](https://github.com/iptv-org/epg) |
 | Authelia (SSO com passkey) | [`authelia`](authelia) | [authelia/authelia](https://github.com/authelia/authelia) |
+| Yamtrack (rastreador de mídia) | [`yamtrack`](yamtrack) | [FuzzyGrim/Yamtrack](https://github.com/FuzzyGrim/Yamtrack) |
 
 ## Installation
 

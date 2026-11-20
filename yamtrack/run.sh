@@ -6,9 +6,10 @@ set -e
 
 OPTIONS=/data/options.json
 
-# Booleans print as True/False, which Yamtrack's settings parse.
+# Booleans print as True/False, which Yamtrack's settings parse. Missing
+# (optional) options print as an empty string.
 option() {
-  python -c 'import json, sys; print(json.load(open(sys.argv[1]))[sys.argv[2]])' "$OPTIONS" "$1"
+  python -c 'import json, sys; print(json.load(open(sys.argv[1])).get(sys.argv[2], ""))' "$OPTIONS" "$1"
 }
 
 mkdir -p /data/db
@@ -29,6 +30,10 @@ URLS=$(option urls)
 [ -n "$URLS" ] && export URLS
 export REGISTRATION="$(option registration)"
 export TMDB_LANG="$(option tmdb_lang)"
+
+# Only needed for the Steam import; unset keeps Yamtrack's empty default.
+STEAM_API_KEY=$(option steam_api_key)
+[ -n "$STEAM_API_KEY" ] && export STEAM_API_KEY
 
 echo "[yamtrack] starting redis-server..."
 redis-server --bind 127.0.0.1 --port 6379 --save '' --appendonly no --daemonize yes

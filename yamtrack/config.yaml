@@ -1,5 +1,5 @@
 name: Yamtrack
-version: "0.26.3"
+version: "0.26.3-1"
 slug: yamtrack
 description: >-
   Rastreador de midia self-hosted: filmes, series, animes, mangas, jogos,
@@ -30,11 +30,15 @@ watchdog: http://[HOST]:[PORT:8000]/health/
 #   recusa POSTs (login, formularios) vindos do dominio publicado.
 # registration: deixe ligado so ate criar sua conta; depois desligue.
 # tmdb_lang: idioma dos metadados do TMDB (ISO 639-1, opcionalmente com pais).
+# steam_api_key: chave de https://steamcommunity.com/dev/apikey, so para a
+#   importacao da Steam. Vazia, a importacao da Steam fica indisponivel.
 options:
   urls: ""
   registration: true
   tmdb_lang: pt-BR
+  steam_api_key: ""
 schema:
   urls: str
   registration: bool
   tmdb_lang: match(^[a-z]{2}(-[A-Z]{2})?$)
+  steam_api_key: password?

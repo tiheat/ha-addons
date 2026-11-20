@@ -1,0 +1,40 @@
+name: Yamtrack
+version: "0.26.3"
+slug: yamtrack
+description: >-
+  Rastreador de midia self-hosted: filmes, series, animes, mangas, jogos,
+  livros e quadrinhos, com historico, notas, calendario de lancamentos e
+  importacao do Trakt, Simkl, MyAnimeList, AniList e outros.
+url: https://github.com/FuzzyGrim/Yamtrack
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: application
+boot: auto
+
+ports:
+  # Porta publicada no host. Trocando o valor por `null` nada e exposto no
+  # host e o servico so responde na rede interna dos add-ons, em
+  # http://08ac8ee6-yamtrack:8000 (hostname derivado do slug). Nesse caso
+  # remova tambem as chaves `webui` e `watchdog`, que dependem da porta.
+  8000/tcp: 8000
+ports_description:
+  8000/tcp: Interface web (HTTP)
+
+webui: http://[HOST]:[PORT:8000]/
+watchdog: http://[HOST]:[PORT:8000]/health/
+
+# urls: enderecos publicos usados pelo proxy reverso (ex.:
+#   https://yamtrack.example.com), separados por virgula. Sem isso o Django
+#   recusa POSTs (login, formularios) vindos do dominio publicado.
+# registration: deixe ligado so ate criar sua conta; depois desligue.
+# tmdb_lang: idioma dos metadados do TMDB (ISO 639-1, opcionalmente com pais).
+options:
+  urls: ""
+  registration: true
+  tmdb_lang: pt-BR
+schema:
+  urls: str
+  registration: bool
+  tmdb_lang: match(^[a-z]{2}(-[A-Z]{2})?$)

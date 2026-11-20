@@ -9,6 +9,7 @@ Custom Home Assistant add-ons, previously kept as local add-ons in `/addons`.
 | EPG Grabber (XMLTV) | [`epg-grabber`](epg-grabber) | [iptv-org/epg](https://github.com/iptv-org/epg) |
 | Authelia (SSO com passkey) | [`authelia`](authelia) | [authelia/authelia](https://github.com/authelia/authelia) |
 | LLDAP (usuarios e grupos) | [`lldap`](lldap) | [lldap/lldap](https://github.com/lldap/lldap) |
+| Yamtrack (rastreador de mídia) | [`yamtrack`](yamtrack) | [FuzzyGrim/Yamtrack](https://github.com/FuzzyGrim/Yamtrack) |
 
 ## Installation
 

@@ -1,0 +1,42 @@
+name: LLDAP
+version: "0.6.3"
+slug: lldap
+description: >-
+  Servidor LDAP leve com interface web para gerenciar usuarios e grupos,
+  usado como base de usuarios do Authelia e de outros servicos.
+url: https://github.com/lldap/lldap
+arch:
+  - amd64
+  - aarch64
+init: false
+startup: services
+boot: auto
+
+# /addon_configs/08ac8ee6_lldap no host, montado em /config no container:
+# lldap_config.toml, banco SQLite e segredos (senha do admin, senha da conta
+# de servico do Authelia, senhas iniciais).
+map:
+  - addon_config:rw
+
+# Sem portas publicadas: LDAP em ldap://08ac8ee6-lldap:3890 e interface web em
+# http://08ac8ee6-lldap:17170, ambos so na rede interna dos add-ons. Publique a
+# interface pelo Nginx Proxy Manager.
+ports:
+  3890/tcp: null
+  17170/tcp: null
+ports_description:
+  3890/tcp: LDAP
+  17170/tcp: Interface web e API
+
+# Usadas apenas na primeira inicializacao (bootstrap). Depois disso, gerencie
+# usuarios e grupos pela interface web.
+options:
+  domain: ""
+  admin_user: ""
+  admin_email: ""
+  admin_group: admins
+schema:
+  domain: str
+  admin_user: match(^([a-z0-9._-]+)?$)
+  admin_email: str?
+  admin_group: match(^[a-z0-9._-]+$)

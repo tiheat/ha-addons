@@ -9,6 +9,7 @@ Custom Home Assistant add-ons, previously kept as local add-ons in `/addons`.
 | EPG Grabber (XMLTV) | [`epg-grabber`](epg-grabber) | [iptv-org/epg](https://github.com/iptv-org/epg) |
 | Authelia (SSO com passkey) | [`authelia`](authelia) | [authelia/authelia](https://github.com/authelia/authelia) |
 | Yamtrack (rastreador de mídia) | [`yamtrack`](yamtrack) | [FuzzyGrim/Yamtrack](https://github.com/FuzzyGrim/Yamtrack) |
+| Claude Code (Remote Control, modo controlado) | [`claude-code`](claude-code) | [code.claude.com](https://code.claude.com/docs) |
 
 ## Installation
 

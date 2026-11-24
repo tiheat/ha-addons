@@ -1,5 +1,5 @@
 name: Claude Code
-version: "2.1.314"
+version: "2.1.314.1"
 slug: claude_code
 description: >-
   Claude Code sempre ligado no Home Assistant, controlado de qualquer lugar
@@ -38,11 +38,20 @@ hassio_role: manager
 # permission_mode: modo de permissao das sessoes abertas pelo Remote Control.
 #   `bypassPermissions` nao funciona no modo livre (o Claude recusa como root).
 # session_name_prefix: prefixo dos nomes das sessoes no claude.ai/code.
+# session_name: nome fixo da sessao do /data/workspace (opcional).
+# workspaces: pastas extras dentro de /data/workspace (ex.: um repositorio
+#   clonado), cada uma com seu proprio Remote Control, ou seja, um ambiente
+#   separado no claude.ai/code. `name` e opcional.
 options:
   controlled_mode: true
   permission_mode: default
   session_name_prefix: home-assistant
+  workspaces: []
 schema:
   controlled_mode: bool
   permission_mode: list(default|acceptEdits|auto|plan|dontAsk|bypassPermissions)
   session_name_prefix: match(^[A-Za-z0-9._-]+$)
+  session_name: str?
+  workspaces:
+    - path: match(^[A-Za-z0-9._-]+(/[A-Za-z0-9._-]+)*$)
+      name: str?

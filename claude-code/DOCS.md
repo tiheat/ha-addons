@@ -59,6 +59,27 @@ de `/data` voltam para o usuário `claude` no próximo início controlado.
 | `controlled_mode` | Liga/desliga o modo controlado (acima). |
 | `permission_mode` | Modo de permissão das sessões (`default`, `acceptEdits`, `auto`, `plan`, `dontAsk`, `bypassPermissions`). No modo livre `bypassPermissions` cai para `default`, porque o Claude Code recusa esse modo como root. |
 | `session_name_prefix` | Prefixo dos nomes das sessões no claude.ai/code. |
+| `session_name` | Nome fixo da sessão do `/data/workspace` (opcional). |
+| `workspaces` | Pastas extras dentro de `/data/workspace`, cada uma como um ambiente separado no claude.ai/code (veja abaixo). |
+
+### Ambientes extras (`workspaces`)
+
+Cada item roda seu próprio `claude remote-control` na pasta indicada, então
+ela aparece como um ambiente à parte no claude.ai/code e as sessões abertas
+nele começam já dentro dela. `path` é relativo a `/data/workspace` e a pasta
+precisa existir (clone o repositório antes, por exemplo de uma sessão do
+ambiente principal); pastas inexistentes são ignoradas com um aviso no log.
+
+```yaml
+workspaces:
+  - path: ha-addons
+    name: ha-addons
+```
+
+O nome da **máquina** exibido no claude.ai/code é o hostname do container
+(`<hash>-claude-code`), definido pelo Supervisor; o add-on não consegue
+trocá-lo. Use `session_name`/`name` e `session_name_prefix` para identificar
+as sessões.
 
 ## Onde ficam os dados
 
@@ -68,7 +89,7 @@ Tudo em `/data`, incluído nos backups do add-on:
 | --- | --- |
 | `/data/home/.claude/.credentials.json` | Login do claude.ai |
 | `/data/home/.claude.json` | Estado do Claude Code (pasta de trabalho já marcada como confiável) |
-| `/data/workspace` | Pasta de trabalho das sessões; clone repositórios aqui |
+| `/data/workspace` | Pasta de trabalho das sessões; clone repositórios aqui (e aponte `workspaces` para eles) |
 
 ## Atualizando
 

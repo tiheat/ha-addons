@@ -19,6 +19,7 @@ CONTROLLED=$(opt controlled_mode)
 PERMISSION_MODE=$(opt permission_mode)
 PREFIX=$(opt session_name_prefix)
 SESSION_NAME=$(opt session_name)
+MACHINE_NAME=$(opt machine_name)
 
 HOME_DIR=/data/home
 WORKSPACE=/data/workspace
@@ -105,6 +106,12 @@ fi
 BASE_ENV="HOME=$HOME_DIR PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
 TZ=${TZ:-UTC} LANG=C.UTF-8 TERM=xterm-256color DISABLE_AUTOUPDATER=1 DISABLE_UPDATES=1 \
 CLAUDE_PERMISSION_MODE=$PERMISSION_MODE CLAUDE_REMOTE_CONTROL_SESSION_NAME_PREFIX=$PREFIX"
+
+# The container hostname can't be changed from inside, so the machine name
+# shown in claude.ai/code is overridden at the libc level instead.
+if [ -n "$MACHINE_NAME" ]; then
+  BASE_ENV="$BASE_ENV LD_PRELOAD=/usr/local/lib/libhostname.so HOSTNAME_OVERRIDE=$MACHINE_NAME"
+fi
 
 if [ "$CONTROLLED" = "true" ]; then
   echo "[claude-code] controlled mode: running as 'claude' (read-only configs, no Supervisor token)"

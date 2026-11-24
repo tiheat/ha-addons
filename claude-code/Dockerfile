@@ -1,3 +1,8 @@
+FROM alpine:3.22 AS hostname
+RUN apk add --no-cache gcc musl-dev
+COPY hostname/hostname.c /src/
+RUN gcc -shared -fPIC -O2 -o /libhostname.so /src/hostname.c
+
 FROM alpine:3.22
 
 # bash e curl sao os requisitos documentados do instalador no Alpine;
@@ -35,6 +40,9 @@ RUN adduser -D -u 1000 -h /data/home -s /bin/bash claude \
 ENV TZ=America/Bahia \
     DISABLE_AUTOUPDATER=1 \
     DISABLE_UPDATES=1
+
+# Shim do LD_PRELOAD que troca o nome da maquina (opcao machine_name).
+COPY --from=hostname /libhostname.so /usr/local/lib/libhostname.so
 
 COPY run.sh /run.sh
 COPY supervise.sh /usr/local/bin/supervise.sh

@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.314.2
+- Opção `machine_name` (padrão `home-assistant`): nome da máquina exibido no
+  claude.ai/code no lugar do hostname `<hash>-claude-code`.
+
 ## 2.1.314.1
 - Opção `session_name`: nome fixo da sessão do `/data/workspace` no
   claude.ai/code.

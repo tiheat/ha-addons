@@ -58,6 +58,7 @@ de `/data` voltam para o usuário `claude` no próximo início controlado.
 | --- | --- |
 | `controlled_mode` | Liga/desliga o modo controlado (acima). |
 | `permission_mode` | Modo de permissão das sessões (`default`, `acceptEdits`, `auto`, `plan`, `dontAsk`, `bypassPermissions`). No modo livre `bypassPermissions` cai para `default`, porque o Claude Code recusa esse modo como root. |
+| `machine_name` | Nome da máquina no claude.ai/code (padrão `home-assistant`; vazio usa o hostname do container). |
 | `session_name_prefix` | Prefixo dos nomes das sessões no claude.ai/code. |
 | `session_name` | Nome fixo da sessão do `/data/workspace` (opcional). |
 | `workspaces` | Pastas extras dentro de `/data/workspace`, cada uma como um ambiente separado no claude.ai/code (veja abaixo). |
@@ -76,10 +77,13 @@ workspaces:
     name: ha-addons
 ```
 
-O nome da **máquina** exibido no claude.ai/code é o hostname do container
-(`<hash>-claude-code`), definido pelo Supervisor; o add-on não consegue
-trocá-lo. Use `session_name`/`name` e `session_name_prefix` para identificar
-as sessões.
+O nome da **máquina** exibido no claude.ai/code vem da opção `machine_name`
+(padrão `home-assistant`). O hostname real do container (`<hash>-claude-code`)
+é definido pelo Supervisor e não pode ser trocado de dentro dele, então o
+add-on sobrescreve o valor que o Claude Code lê da libc (`uname`/`gethostname`)
+via `LD_PRELOAD`. Deixe a opção vazia para voltar ao hostname. Ao trocar o
+nome, o claude.ai/code pode passar a mostrar um ambiente novo; o antigo fica
+offline e pode ser ignorado.
 
 ## Onde ficam os dados
 

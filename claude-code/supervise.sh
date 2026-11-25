@@ -20,9 +20,19 @@ serve() {
       continue
     fi
 
-    echo "[claude-code] starting remote-control in $dir (permission mode: $CLAUDE_PERMISSION_MODE)"
-    claude remote-control "${args[@]}" </dev/null
-    echo "[claude-code] remote-control in $dir exited with code $?; restarting in 10s"
+    # Reattach to the session recorded for this dir (it survives restarts in
+    # /data/home, for about 4 hours). A quick failure means there is nothing
+    # to continue, so a new session is created instead.
+    echo "[claude-code] continuing remote-control in $dir (permission mode: $CLAUDE_PERMISSION_MODE)"
+    local start=$SECONDS
+    claude remote-control --continue "${args[@]}" </dev/null
+    local rc=$?
+    if [ "$rc" -ne 0 ] && [ $((SECONDS - start)) -lt 30 ]; then
+      echo "[claude-code] nothing to continue in $dir (code $rc); starting a new session"
+      claude remote-control "${args[@]}" </dev/null
+      rc=$?
+    fi
+    echo "[claude-code] remote-control in $dir exited with code $rc; restarting in 10s"
     sleep 10
   done
 }

@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.1.314.3
+- `/media` passa a ser montada no add-on (gravações do Frigate etc.).
+- Opção `media_access` (padrão desligada): libera `/media` para o Claude.
+  Desligada, regras gerenciadas do Claude bloqueiam a pasta.
+- Ao reiniciar, cada ambiente reconecta a sessão que estava aberta
+  (`claude remote-control --continue`, até cerca de 4 horas depois) em vez de
+  criar uma nova.
+
 ## 2.1.314.2
 - Opção `machine_name` (padrão `home-assistant`): nome da máquina exibido no
   claude.ai/code no lugar do hostname `<hash>-claude-code`.

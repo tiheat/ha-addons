@@ -1,5 +1,5 @@
 name: Claude Code
-version: "2.1.314.2"
+version: "2.1.314.3"
 slug: claude_code
 description: >-
   Claude Code sempre ligado no Home Assistant, controlado de qualquer lugar
@@ -21,10 +21,13 @@ boot: auto
 #   /homeassistant  -> configuracao do Home Assistant (/config no host)
 #   /addon_configs  -> configuracoes de todos os add-ons
 #   /share          -> pasta compartilhada
+#   /media          -> midia (gravacoes do Frigate etc.). Sempre montada, mas
+#                      o Claude so usa com a opcao media_access ligada.
 map:
   - homeassistant_config:rw
   - all_addon_configs:rw
   - share:rw
+  - media:rw
 
 # Token do Supervisor (API do Core e do Supervisor e a CLI `ha`). So e
 # entregue ao Claude no modo livre.
@@ -35,6 +38,9 @@ hassio_role: manager
 # controlled_mode: ligado, o Claude so le as configuracoes (HA, add-ons,
 #   /share) e nao recebe o token do Supervisor. Desligado, roda como root com
 #   acesso total. Reinicie o add-on depois de mudar.
+# media_access: libera /media para o Claude, com o mesmo acesso das outras
+#   pastas (escrita so no modo livre). Desligado, regras gerenciadas do Claude
+#   negam leitura e edicao ali; nao e uma trava do sistema (o shell contorna).
 # permission_mode: modo de permissao das sessoes abertas pelo Remote Control.
 #   `bypassPermissions` nao funciona no modo livre (o Claude recusa como root).
 # machine_name: nome da maquina exibido no claude.ai/code (no lugar do
@@ -46,12 +52,14 @@ hassio_role: manager
 #   separado no claude.ai/code. `name` e opcional.
 options:
   controlled_mode: true
+  media_access: false
   permission_mode: default
   machine_name: home-assistant
   session_name_prefix: home-assistant
   workspaces: []
 schema:
   controlled_mode: bool
+  media_access: bool
   permission_mode: list(default|acceptEdits|auto|plan|dontAsk|bypassPermissions)
   machine_name: match(^[A-Za-z0-9._-]{1,63}$)?
   session_name_prefix: match(^[A-Za-z0-9._-]+$)

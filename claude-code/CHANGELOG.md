@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.1.314.4
+- Corrige ambientes que apareciam online no claude.ai/code mas não aceitavam
+  sessões: o `claude remote-control --continue` reconectava só uma sessão e,
+  se ela falhasse, ficava reiniciando em loop. Agora cada ambiente sempre sobe
+  o `claude remote-control` normal; após um restart, uma sessão nova é criada
+  (as anteriores continuam no histórico).
+
 ## 2.1.314.3
 - `/media` passa a ser montada no add-on (gravações do Frigate etc.).
 - Opção `media_access` (padrão desligada): libera `/media` para o Claude.

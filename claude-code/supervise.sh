@@ -20,18 +20,12 @@ serve() {
       continue
     fi
 
-    # Reattach to the session recorded for this dir (it survives restarts in
-    # /data/home, for about 4 hours). A quick failure means there is nothing
-    # to continue, so a new session is created instead.
-    echo "[claude-code] continuing remote-control in $dir (permission mode: $CLAUDE_PERMISSION_MODE)"
-    local start=$SECONDS
-    claude remote-control --continue "${args[@]}" </dev/null
+    # No --continue: it reattaches a single session ("exits when complete")
+    # instead of serving the environment, and a session that keeps failing
+    # makes it exit 0 in a loop, so the environment shows up but can't be used.
+    echo "[claude-code] starting remote-control in $dir (permission mode: $CLAUDE_PERMISSION_MODE)"
+    claude remote-control "${args[@]}" </dev/null
     local rc=$?
-    if [ "$rc" -ne 0 ] && [ $((SECONDS - start)) -lt 30 ]; then
-      echo "[claude-code] nothing to continue in $dir (code $rc); starting a new session"
-      claude remote-control "${args[@]}" </dev/null
-      rc=$?
-    fi
     echo "[claude-code] remote-control in $dir exited with code $rc; restarting in 10s"
     sleep 10
   done

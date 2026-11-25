@@ -28,11 +28,9 @@ O login é interativo e feito uma vez só; ele fica salvo em `/data/home`.
 4. Em até um minuto o add-on inicia o `claude remote-control`. A sessão
    aparece no claude.ai/code e no app com o prefixo `session_name_prefix`.
 
-Reiniciar o add-on (ou atualizar) reconecta a sessão que estava aberta em
-cada ambiente, com o histórico, se o restart for em até cerca de 4 horas; depois
-disso, ou se não houver sessão registrada, uma nova é criada. Uma tarefa em
-andamento no momento do restart é interrompida e precisa ser retomada com uma
-nova mensagem. Só a última sessão registrada de cada pasta é reconectada.
+Reiniciar o add-on (ou atualizar) cria uma sessão nova em cada ambiente; as
+anteriores continuam no histórico do claude.ai/code. Uma tarefa em andamento no
+momento do restart é interrompida.
 
 O login pode expirar; se as sessões sumirem, confira com
 `claude auth status --text` (mesmo `docker exec`) e repita o passo 2.

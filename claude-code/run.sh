@@ -9,6 +9,8 @@
 # /addon_configs and /share are root-owned, so it can read but not write
 # them; the managed deny rules are only a second layer, since permission
 # rules don't cover shell redirects.
+# /media follows the same rules when `media_access` is on; when off, only the
+# managed deny rules keep Claude out of it.
 # Free mode: Claude runs as root with the Supervisor token.
 set -e
 
@@ -16,6 +18,7 @@ OPTIONS=/data/options.json
 opt() { jq -r --arg k "$1" '.[$k] // empty' "$OPTIONS"; }
 
 CONTROLLED=$(opt controlled_mode)
+MEDIA_ACCESS=$(opt media_access)
 PERMISSION_MODE=$(opt permission_mode)
 PREFIX=$(opt session_name_prefix)
 SESSION_NAME=$(opt session_name)
@@ -62,25 +65,32 @@ chown -R claude:claude "$HOME_DIR" "$WORKSPACE"
 chmod 700 "$HOME_DIR"
 
 mkdir -p "$POLICY_DIR"
+# Managed deny rules, one per line; turned into managed-settings.json below.
 if [ "$CONTROLLED" = "true" ]; then
   MODE_TEXT="CONTROLADO: somente leitura de /homeassistant, /addon_configs e /share; sem token do Supervisor."
-  cat >"$POLICY_DIR/managed-settings.json" <<'EOF'
-{
-  "permissions": {
-    "deny": [
-      "Edit(//homeassistant/**)",
-      "Edit(//config/**)",
-      "Edit(//addon_configs/**)",
-      "Edit(//share/**)",
-      "Read(//homeassistant/secrets.yaml)"
-    ]
-  }
-}
-EOF
+  DENY="Edit(//homeassistant/**)
+Edit(//config/**)
+Edit(//addon_configs/**)
+Edit(//share/**)
+Edit(//media/**)
+Read(//homeassistant/secrets.yaml)"
 else
   MODE_TEXT="LIVRE: root, leitura e escrita em /homeassistant, /addon_configs e /share, com SUPERVISOR_TOKEN (CLI \`ha\` e API do Supervisor/Core)."
-  echo '{}' >"$POLICY_DIR/managed-settings.json"
+  DENY=""
 fi
+
+# /media is always mounted (the Supervisor map can't follow an option), so
+# media_access only toggles Claude's own rules; the shell can still reach it.
+if [ "$MEDIA_ACCESS" = "true" ]; then
+  MEDIA_TEXT="- /media: midia do Home Assistant (gravacoes do Frigate etc.), com o mesmo acesso das pastas acima."
+else
+  MEDIA_TEXT="- /media: montada, mas bloqueada pela opcao \`media_access\` (desligada). Nao acesse /media, nem pelo shell."
+  DENY="$DENY
+Read(//media/**)
+Edit(//media/**)"
+fi
+printf '%s\n' "$DENY" | jq -R 'select(length > 0)' |
+  jq -s '{permissions: {deny: unique}}' >"$POLICY_DIR/managed-settings.json"
 
 cat >"$POLICY_DIR/CLAUDE.md" <<EOF
 # Ambiente: add-on Claude Code do Home Assistant
@@ -92,6 +102,7 @@ do Home Assistant, seguida de restart). Nao tente contornar o modo controlado.
 - /homeassistant: configuracao do Home Assistant (configuration.yaml, .storage).
 - /addon_configs: configuracoes dos add-ons.
 - /share: pasta compartilhada do Home Assistant.
+$MEDIA_TEXT
 - /data/workspace: pasta de trabalho persistente (clone repositorios aqui).
 - No modo livre, \`ha\` (CLI do Supervisor) e \`curl -H "Authorization: Bearer \$SUPERVISOR_TOKEN" http://supervisor/core/api/...\` acessam o Home Assistant.
 - Sempre valide a configuracao (\`ha core check\`) antes de reiniciar o Core.

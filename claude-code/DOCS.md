@@ -28,6 +28,12 @@ O login é interativo e feito uma vez só; ele fica salvo em `/data/home`.
 4. Em até um minuto o add-on inicia o `claude remote-control`. A sessão
    aparece no claude.ai/code e no app com o prefixo `session_name_prefix`.
 
+Reiniciar o add-on (ou atualizar) reconecta a sessão que estava aberta em
+cada ambiente, com o histórico, se o restart for em até cerca de 4 horas; depois
+disso, ou se não houver sessão registrada, uma nova é criada. Uma tarefa em
+andamento no momento do restart é interrompida e precisa ser retomada com uma
+nova mensagem. Só a última sessão registrada de cada pasta é reconectada.
+
 O login pode expirar; se as sessões sumirem, confira com
 `claude auth status --text` (mesmo `docker exec`) e repita o passo 2.
 
@@ -37,6 +43,7 @@ O login pode expirar; se as sessões sumirem, confira com
 | --- | --- | --- |
 | Usuário do processo | `claude` (uid 1000) | `root` |
 | `/homeassistant`, `/addon_configs`, `/share` | Somente leitura | Leitura e escrita |
+| `/media` (com `media_access: true`) | Somente leitura | Leitura e escrita |
 | Token do Supervisor (CLI `ha`, API do Core) | Não recebe | Recebe |
 | `/data/workspace` (repositórios) | Leitura e escrita | Leitura e escrita |
 
@@ -57,11 +64,22 @@ de `/data` voltam para o usuário `claude` no próximo início controlado.
 | Opção | Para que serve |
 | --- | --- |
 | `controlled_mode` | Liga/desliga o modo controlado (acima). |
+| `media_access` | Libera `/media` (gravações do Frigate etc.) para o Claude (padrão desligado; veja abaixo). |
 | `permission_mode` | Modo de permissão das sessões (`default`, `acceptEdits`, `auto`, `plan`, `dontAsk`, `bypassPermissions`). No modo livre `bypassPermissions` cai para `default`, porque o Claude Code recusa esse modo como root. |
 | `machine_name` | Nome da máquina no claude.ai/code (padrão `home-assistant`; vazio usa o hostname do container). |
 | `session_name_prefix` | Prefixo dos nomes das sessões no claude.ai/code. |
 | `session_name` | Nome fixo da sessão do `/data/workspace` (opcional). |
 | `workspaces` | Pastas extras dentro de `/data/workspace`, cada uma como um ambiente separado no claude.ai/code (veja abaixo). |
+
+### Acesso a `/media` (`media_access`)
+
+O Home Assistant não deixa uma opção mudar as pastas montadas no add-on, então
+`/media` está sempre montada. Com `media_access: true` o Claude a usa com o
+mesmo acesso das outras pastas (somente leitura no modo controlado, escrita no
+modo livre). Desligada (padrão), regras `deny` gerenciadas bloqueiam leitura e
+edição ali e o `CLAUDE.md` avisa para não usar. Esse bloqueio é do Claude, não
+do sistema operacional: um comando de shell ainda alcança a pasta. Mude a opção
+e reinicie o add-on.
 
 ### Ambientes extras (`workspaces`)
 

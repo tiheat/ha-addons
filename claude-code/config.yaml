@@ -1,5 +1,5 @@
 name: Claude Code
-version: "2.1.314.3"
+version: "2.1.314.4"
 slug: claude_code
 description: >-
   Claude Code sempre ligado no Home Assistant, controlado de qualquer lugar
